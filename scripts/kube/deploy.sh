@@ -18,7 +18,10 @@
 #  under the License.                                           *
 
 set -x
-
+AOK_AIRFLOW_REPOSITORY="airflow-eks-demo"
+AOK_EFS_FS_ID="fs-063820c20164423d8"
+AOK_EFS_AP="fsap-02a255c36c6bee42a"
+AOK_SQL_ALCHEMY_CONN="postgresql://airflowadmin:supersecretpassword@airflow-postgres.c32ugoigi8nr.us-west-2.rds.amazonaws.com:5432/airflow"
 echo "Airflow Image Repo" $AOK_AIRFLOW_REPOSITORY
 echo "EFS File System ID" $AOK_EFS_FS_ID
 echo "EFS Access Point" $AOK_EFS_AP
