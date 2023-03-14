@@ -9,7 +9,6 @@
 # Prerequisites:
 # - AWS Profile should be setup on the executing shell.
 # - Environment variables AOK_AWS_REGION, AOK_EKS_CLUSTER_NAME should be set.
-
 AOK_NODE_GROUP_NAME="WorkerNodegroup-Mmtydm2vARjW"
 printf "Deploy Kubernetes Cluster Autoscaler.\n"
 
@@ -167,7 +166,7 @@ aws rds create-db-subnet-group \
 printf "Creating the RDS Postgres Instance...\n"
 aws rds create-db-instance \
   --db-instance-identifier airflow-postgres \
-  --db-instance-class db.m4.large \
+  --db-instance-class db.t3.medium \
   --db-name airflow \
   --db-subnet-group-name airflow-postgres-subnet \
   --engine postgres \
