@@ -10,7 +10,7 @@
 # - AWS Profile should be setup on the executing shell.
 # - Environment variables AOK_AWS_REGION, AOK_EKS_CLUSTER_NAME should be set.
 
-
+AOK_NODE_GROUP_NAME="WorkerNodegroup-Mmtydm2vARjW"
 printf "Deploy Kubernetes Cluster Autoscaler.\n"
 
 printf "Associating OIDC provider with the EKS cluster...\n"
@@ -127,7 +127,7 @@ sleep 10
 printf "Creating EFS mount targets in each subnet attached to on-demand nodes...\n"
 for subnet in $(aws eks describe-nodegroup \
   --cluster-name $AOK_EKS_CLUSTER_NAME \
-  --nodegroup-name ng-on-demand \
+  --nodegroup-name $AOK_NODE_GROUP_NAME \
   --region $AOK_AWS_REGION \
   --output text \
   --query "nodegroup.subnets"); \
@@ -152,7 +152,7 @@ printf "Deploy an Amazon RDS PostgreSQL database.\n"
 printf "Obtaining the list of Private Subnets in Env variables...\n"
 export AOK_PRIVATE_SUBNETS=$(aws eks describe-nodegroup \
   --cluster-name $AOK_EKS_CLUSTER_NAME \
-  --nodegroup-name ng-on-demand \
+  --nodegroup-name $AOK_NODE_GROUP_NAME \
   --region $AOK_AWS_REGION \
   --output text \
   --query "nodegroup.subnets" | awk -v OFS="," '{for(i=1;i<=NF;i++)if($i~/subnet/)$i="\"" $i "\"";$1=$1}1')
